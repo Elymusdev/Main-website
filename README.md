@@ -30,7 +30,7 @@ app/                 pages and components (Next.js App Router)
   news/              press and podcast coverage
   contact/           inquiry form (mailto-based)
   components/        SiteChrome (nav/footer/shell), MoaExplorer, InquiryForm
-  content/seed.ts    fallback content, also the source for the CMS import
+  content/            default copy (seed.ts = lists, pages.ts = page copy)
   lib/               Sanity client and content accessors
   globals.css        all site styling
 public/              images served at the site root
@@ -44,14 +44,18 @@ tests/               rendered-HTML check against the built artifact
 
 ## Content
 
-News, publications, and team members come from **Sanity**, fetched at request
-time so edits go live without a redeploy. See `studio/README.md` for setup and
-for how the client edits content.
+All site content comes from **Sanity** (project `2hp0kt0w`, dataset
+`production`), fetched at request time so edits go live without a redeploy —
+lists (news, publications, team) and page copy (headings, paragraphs, cards,
+CTAs, footer). See `studio/README.md` for how the client edits it.
 
-`app/content/seed.ts` holds the same content as a fallback: if Sanity is
-unconfigured or unreachable, pages render from seed rather than breaking. The
-remaining page copy (hero headlines, section paragraphs) is still inline in the
-page files.
+Defaults live in `app/content/seed.ts` (lists) and `app/content/pages.ts`
+(page copy). If Sanity is unconfigured or unreachable, or an editor leaves a
+field blank, the site renders those defaults rather than breaking.
+
+CMS-backed pages set `export const dynamic = "force-dynamic"`. Without it Next
+statically prerenders them and bakes content into the deployed artifact, so
+editor changes would never appear.
 
 ## Commands
 

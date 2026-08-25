@@ -56,9 +56,19 @@ Editors work in the Studio and press **Publish**. Nothing else is needed.
 
 | Section | What it controls |
 |---|---|
-| News item | The list on `/news`. Add, edit, reorder, delete. |
-| Publication | The list on `/publications`. |
-| Team member | Leadership and Advisors on `/about`, split by the **Section** field. |
+| News | The list on `/news`. Add, edit, reorder, delete. |
+| Publications | The list on `/publications`. |
+| Team | Leadership and Advisors on `/about`, split by the **Section** field. |
+| Home / Science / Pipeline / About / Contact / News / Publications page | All copy on that page — headings, intro paragraphs, cards, CTAs. |
+| Site settings | Footer tagline, footer disclaimer, and the contact form's destination email. |
+
+The page entries are single documents, not lists, so there is no way to
+accidentally create a second "Home page".
+
+Any field left blank falls back to the copy shipped in `app/content/pages.ts`,
+so clearing a field never leaves a blank heading on the live site.
+
+Headings marked "line breaks allowed" render each new line as a line break.
 
 **Display order** on each document controls sequence — lower numbers first.
 Leave it blank to use the default (news and publications by newest, team by name).

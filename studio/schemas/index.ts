@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { pageTypes } from "./pages";
 
 /**
  * Content model for the Elymus site.
@@ -170,4 +171,4 @@ export const teamMember = defineType({
   },
 });
 
-export const schemaTypes = [newsItem, publication, teamMember];
+export const schemaTypes = [newsItem, publication, teamMember, ...pageTypes];

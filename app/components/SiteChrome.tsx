@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getSiteSettings } from "../lib/content";
 
 const nav = [
   { label: "Science", href: "/science" },
@@ -22,15 +23,22 @@ export function SiteHeader() {
   );
 }
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const s = await getSiteSettings();
   return (
     <footer className="site-footer">
-      <div><Link className="footer-brand" href="/">elymus</Link><p>Leveraging unique performance from bottlebrush macromolecules.</p></div>
+      <div><Link className="footer-brand" href="/">elymus</Link><p>{s.footerTagline}</p></div>
       <div className="footer-links"><Link href="/science">Science</Link><Link href="/pipeline">Pipeline</Link><Link href="/about">Team</Link><Link href="/contact">Contact</Link></div>
-      <p className="fine-print">Elymus is a preclinical-stage biotechnology company. Its investigational technologies have not been approved by any regulatory authority, and safety and efficacy have not been established.</p>
+      <p className="fine-print">{s.footerFinePrint}</p>
     </footer>
   );
 }
 
 export function PageShell({ children }: { children: React.ReactNode }) { return <><SiteHeader /><main>{children}</main><SiteFooter /></>; }
 export function ArrowIcon() { return <span aria-hidden="true">↗</span>; }
+
+/** Renders newlines in editor-supplied copy as <br/>, so headings keep their line breaks. */
+export function Lines({ text }: { text: string }) {
+  const parts = text.split("\n");
+  return <>{parts.map((line, i) => <span key={i}>{line}{i < parts.length - 1 ? <br/> : null}</span>)}</>;
+}

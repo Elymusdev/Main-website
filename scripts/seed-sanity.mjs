@@ -12,6 +12,10 @@
  */
 import { writeFileSync } from "node:fs";
 import { newsSeed, publicationsSeed, teamSeed } from "../app/content/seed.ts";
+import {
+  homeDefaults, scienceDefaults, pipelineDefaults, aboutDefaults,
+  contactDefaults, newsDefaults, publicationsDefaults, siteSettingsDefaults,
+} from "../app/content/pages.ts";
 
 const outPath = process.argv[2] ?? "studio/.seed.ndjson";
 
@@ -53,6 +57,15 @@ const docs = [
     // uploads a replacement in the Studio.
     imagePath: m.image,
   })),
+  // Page copy singletons: fixed _ids matching the accessors in app/lib/content.ts.
+  { _id: "homePage", _type: "homePage", ...homeDefaults },
+  { _id: "sciencePage", _type: "sciencePage", ...scienceDefaults },
+  { _id: "pipelinePage", _type: "pipelinePage", ...pipelineDefaults },
+  { _id: "aboutPage", _type: "aboutPage", ...aboutDefaults },
+  { _id: "contactPage", _type: "contactPage", ...contactDefaults },
+  { _id: "newsPage", _type: "newsPage", ...newsDefaults },
+  { _id: "publicationsPage", _type: "publicationsPage", ...publicationsDefaults },
+  { _id: "siteSettings", _type: "siteSettings", ...siteSettingsDefaults },
 ];
 
 writeFileSync(outPath, docs.map((d) => JSON.stringify(d)).join("\n") + "\n");
