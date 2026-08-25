@@ -15,7 +15,16 @@ const hypothesisSteps = [
   { n: "03", title: "Healed", text: "Following repair, the polymer may desorb, leaving a healed lipid bilayer." },
 ];
 
-export default function MoaExplorer({ compact = false, variant = "standard" }: { compact?: boolean; variant?: "standard" | "hypotheses" }) {
+export default function MoaExplorer({
+  compact = false,
+  variant = "standard",
+  image,
+}: {
+  compact?: boolean;
+  variant?: "standard" | "hypotheses";
+  /** Diagram to show. Supplied by the server page so it can come from the CMS. */
+  image: { url: string; width: number; height: number };
+}) {
   const [active, setActive] = useState(0);
   const tabs = useRef<Array<HTMLButtonElement | null>>([]);
   // Unique per instance so the tab/panel wiring stays valid if two explorers share a page.
@@ -46,9 +55,9 @@ export default function MoaExplorer({ compact = false, variant = "standard" }: {
       <div className="moa-stage" data-step={active}>
         <Image
           className="moa-art"
-          src={isHypotheses ? "/science/elymer-moa-three-hypotheses.png" : "/science/elymer-moa-original.png"}
-          width={isHypotheses ? 960 : 2048}
-          height={isHypotheses ? 540 : 1280}
+          src={image.url}
+          width={image.width}
+          height={image.height}
           alt={isHypotheses
             ? "Elymer proposed mechanism of action showing three hypotheses for how the polymer may interact with the lipid bilayer: patch, repair, and heal"
             : "Three-step Elymer proposed mechanism of action showing a connected membrane, DMD membrane instability, and proposed bottlebrush-based membrane support"}

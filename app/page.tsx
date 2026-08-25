@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import MoaExplorer from "./components/MoaExplorer";
 import { ArrowIcon, Lines, PageShell } from "./components/SiteChrome";
-import { getHome } from "./lib/content";
+import { getHome, getSiteSettings } from "./lib/content";
 
 // Rendered per request so CMS edits appear without a redeploy. Without this
 // the page is statically prerendered and content is baked into the artifact.
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const c = await getHome();
+  const [c, settings] = await Promise.all([getHome(), getSiteSettings()]);
   return (
     <PageShell>
       <section className="hero">
@@ -19,7 +19,7 @@ export default async function Home() {
           <div className="button-row"><Link className="button primary" href="/science">{c.heroPrimaryCta} <ArrowIcon /></Link><Link className="button ghost" href="/pipeline">{c.heroSecondaryCta}</Link></div>
           <div className="hero-proof">{c.heroProof.map((p) => <span key={p.label}><b>{p.label}</b> {p.text}</span>)}</div>
         </div>
-        <div className="hero-art" aria-hidden="true"><Image className="hero-bottlebrush" src="/science/bottlebrush-macromolecule.png" width={1126} height={1324} alt="" priority /><p><Lines text={c.heroArtCaption} /></p></div>
+        <div className="hero-art" aria-hidden="true"><Image className="hero-bottlebrush" src={c.heroImage.url} width={c.heroImage.width} height={c.heroImage.height} alt="" priority /><p><Lines text={c.heroArtCaption} /></p></div>
       </section>
 
       <section className="intro-grid section-pad">
@@ -30,7 +30,7 @@ export default async function Home() {
 
       <section className="moa-home section-pad">
         <div className="section-heading"><p className="eyebrow light">{c.moaEyebrow}</p><h2>{c.moaHeading}</h2><p>{c.moaDescription}</p></div>
-        <MoaExplorer compact variant="hypotheses" />
+        <MoaExplorer compact variant="hypotheses" image={settings.moaImage} />
       </section>
 
       <section className="platform-cards section-pad">

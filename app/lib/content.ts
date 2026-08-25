@@ -85,16 +85,28 @@ function merge<T extends object>(defaults: T, cms: Partial<T> | null): T {
   return out as T;
 }
 
+/**
+ * Resolve a Sanity image field to {url, width, height}.
+ *
+ * Uploaded images are refs, so they need an explicit join — a plain document
+ * fetch would return an unusable asset reference. Returns null when nothing has
+ * been uploaded, which `merge` then skips in favour of the shipped default.
+ */
+const img = (field: string) =>
+  `"${field}": ${field}.asset->{ url, "width": metadata.dimensions.width, "height": metadata.dimensions.height }`;
+
 /** Page copy lives in one singleton document per page, addressed by a fixed _id. */
-async function page<T extends object>(id: string, defaults: T): Promise<T> {
-  return merge(defaults, await sanityFetch<Partial<T>>(`*[_id == $id][0]`, { id }));
+async function page<T extends object>(id: string, defaults: T, projection = "..."): Promise<T> {
+  return merge(defaults, await sanityFetch<Partial<T>>(`*[_id == $id][0]{${projection}}`, { id }));
 }
 
-export const getHome = () => page<HomeContent>("homePage", homeDefaults);
+export const getHome = () => page<HomeContent>("homePage", homeDefaults, `..., ${img("heroImage")}`);
 export const getScience = () => page<ScienceContent>("sciencePage", scienceDefaults);
-export const getPipeline = () => page<PipelineContent>("pipelinePage", pipelineDefaults);
+export const getPipeline = () =>
+  page<PipelineContent>("pipelinePage", pipelineDefaults, `..., figures[]{ ..., ${img("image")} }`);
 export const getAbout = () => page<AboutContent>("aboutPage", aboutDefaults);
 export const getContact = () => page<ContactContent>("contactPage", contactDefaults);
 export const getNewsPage = () => page<SimplePageContent>("newsPage", newsDefaults);
 export const getPublicationsPage = () => page<SimplePageContent>("publicationsPage", publicationsDefaults);
-export const getSiteSettings = () => page<SiteSettings>("siteSettings", siteSettingsDefaults);
+export const getSiteSettings = () =>
+  page<SiteSettings>("siteSettings", siteSettingsDefaults, `..., ${img("logo")}, ${img("moaImage")}`);

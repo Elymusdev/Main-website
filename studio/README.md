@@ -73,8 +73,23 @@ Headings marked "line breaks allowed" render each new line as a line break.
 **Display order** on each document controls sequence — lower numbers first.
 Leave it blank to use the default (news and publications by newest, team by name).
 
-Portraits: uploading an image replaces the file shipped with the site. Until
-someone uploads one, the built-in `/team/*.png` is used.
+### Images
+
+Every image on the site can be replaced by uploading one — no developer needed:
+
+| Image | Where to change it |
+|---|---|
+| Team portraits | Team → the person → **Portrait** |
+| Header logo | Site settings → **Header logo** |
+| Mechanism diagram (Home + Science) | Site settings → **Mechanism diagram** |
+| Home hero illustration | Home page → **Hero image** |
+| Pipeline figures | Pipeline page → Figures → **Figure image** |
+
+Leaving an upload empty keeps the image that ships with the site, so clearing
+one never leaves a gap. Uploaded images are served from Sanity's CDN and
+resized automatically — upload the original, not a pre-shrunk copy.
+
+Use the crop/hotspot tool after uploading if the framing needs adjusting.
 
 ## Changing the content model
 

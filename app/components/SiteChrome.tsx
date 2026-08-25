@@ -10,11 +10,12 @@ const nav = [
   { label: "News", href: "/news" },
 ];
 
-export function SiteHeader() {
+export async function SiteHeader() {
+  const s = await getSiteSettings();
   return (
     <header className="site-header">
       <Link className="brand" href="/" aria-label="Elymus home">
-        <Image className="brand-mark" src="/elymus-mark.png" width={1130} height={2048} alt="" priority />
+        <Image className="brand-mark" src={s.logo.url} width={s.logo.width} height={s.logo.height} alt="" priority />
         <span><strong>elymus</strong></span>
       </Link>
       <nav aria-label="Primary navigation">{nav.map(({ label, href }) => <Link key={href} href={href}>{label}</Link>)}</nav>

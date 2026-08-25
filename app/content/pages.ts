@@ -10,6 +10,9 @@
 
 export type Labelled = { label: string; text: string };
 
+/** A resolved image: either a file under /public or an upload from Sanity's CDN. */
+export type ImageRef = { url: string; width: number; height: number };
+
 export type HomeContent = {
   heroHeading: string;
   heroAccent: string;
@@ -18,6 +21,7 @@ export type HomeContent = {
   heroSecondaryCta: string;
   heroProof: Labelled[];
   heroArtCaption: string;
+  heroImage: ImageRef;
   introEyebrow: string;
   introHeading: string;
   introBodyBefore: string;
@@ -66,7 +70,7 @@ export type PipelineContent = {
   dmdEyebrow: string;
   dmdHeading: string;
   dmdBody: string[];
-  figures: { src: string; alt: string; caption: string; width: number; height: number }[];
+  figures: { src: string; alt: string; caption: string; width: number; height: number; image?: ImageRef | null }[];
   horizonEyebrow: string;
   horizonHeading: string;
   horizonItems: Labelled[];
@@ -113,6 +117,8 @@ export type SiteSettings = {
   footerTagline: string;
   footerFinePrint: string;
   contactEmail: string;
+  logo: ImageRef;
+  moaImage: ImageRef;
 };
 
 export const homeDefaults: HomeContent = {
@@ -128,6 +134,7 @@ export const homeDefaults: HomeContent = {
     { label: "Peer-reviewed", text: "foundation" },
   ],
   heroArtCaption: "Engineered architecture.\nPurposeful membrane engagement.",
+  heroImage: { url: "/science/bottlebrush-macromolecule.png", width: 1126, height: 1324 },
   introEyebrow: "Engineering Biology Approach",
   introHeading: "Protecting the membrane that protects the muscle",
   introBodyBefore:
@@ -309,4 +316,6 @@ export const siteSettingsDefaults: SiteSettings = {
   footerFinePrint:
     "Elymus is a preclinical-stage biotechnology company. Its investigational technologies have not been approved by any regulatory authority, and safety and efficacy have not been established.",
   contactEmail: "contact@elymus.bio",
+  logo: { url: "/elymus-mark.png", width: 1130, height: 2048 },
+  moaImage: { url: "/science/elymer-moa-three-hypotheses.png", width: 960, height: 540 },
 };

@@ -41,6 +41,16 @@ const labelled = (name: string, title: string, description?: string) =>
     ],
   });
 
+/** Upload field. Leaving it empty keeps the image shipped with the site. */
+const image = (name: string, title: string, description?: string) =>
+  defineField({
+    name,
+    title,
+    type: "image",
+    options: { hotspot: true },
+    description: description ?? "Leave empty to keep the image shipped with the site.",
+  });
+
 const strings = (name: string, title: string, description?: string) =>
   defineField({ name, title, type: "array", of: [defineArrayMember({ type: "string" })], description });
 
@@ -64,6 +74,7 @@ export const homePage = singleton("homePage", "Home page", [
   str("heroPrimaryCta", "Primary button label"),
   str("heroSecondaryCta", "Secondary button label"),
   labelled("heroProof", "Hero proof points", "The three bold-plus-text items under the buttons."),
+  image("heroImage", "Hero image", "The bottlebrush illustration beside the headline. Leave empty to keep the shipped image."),
   heading("heroArtCaption", "Hero image caption"),
   str("introEyebrow", "Intro eyebrow"),
   str("introHeading", "Intro heading"),
@@ -158,7 +169,8 @@ export const pipelinePage = singleton("pipelinePage", "Pipeline page", [
       defineArrayMember({
         type: "object",
         fields: [
-          str("src", "Image path", "Path under /public, e.g. /dmd/dmd-progression-elymus.png"),
+          image("image", "Figure image", "Upload to replace the shipped figure."),
+          str("src", "Shipped image path", "Used only when no figure image is uploaded."),
           txt("alt", "Alt text", "Describes the image for screen readers. Required for accessibility."),
           txt("caption", "Caption"),
           defineField({ name: "width", title: "Width (px)", type: "number" }),
@@ -231,6 +243,8 @@ export const siteSettings = singleton("siteSettings", "Site settings", [
   txt("footerTagline", "Footer tagline"),
   txt("footerFinePrint", "Footer fine print", "The regulatory disclaimer in the footer of every page."),
   str("contactEmail", "Contact email", "Where the contact form sends inquiries."),
+  image("logo", "Header logo", "The mark beside “elymus” in the header on every page."),
+  image("moaImage", "Mechanism diagram", "The mechanism-of-action image shown on the Home and Science pages."),
 ]);
 
 export const pageTypes = [
