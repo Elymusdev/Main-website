@@ -1,37 +1,45 @@
 /**
- * One-time import of the site's existing content into Sanity.
+ * Emits the site's existing content as NDJSON for `sanity dataset import`.
  *
- *   SANITY_PROJECT_ID=xxxx SANITY_WRITE_TOKEN=sk... node scripts/seed-sanity.mjs
+ *   npm run cms:seed
  *
- * Create the token at sanity.io/manage → API → Tokens with Editor permission.
- * It is used only here, from your machine — the site never needs a token.
+ * Import runs through the Sanity CLI, which uses the login from `sanity login`,
+ * so no API token is needed — nothing secret is handled here or deployed.
  *
- * Safe to re-run: documents use deterministic _ids and are created only if
- * missing (`createIfNotExists`), so re-running never duplicates or overwrites
- * edits made in the Studio. Pass --replace to force-overwrite instead.
+ * Documents use deterministic _ids derived from their URL or name, and the
+ * import runs with --missing, so re-running never duplicates entries or
+ * overwrites edits made in the Studio.
  */
-import { createClient } from "@sanity/client";
+import { writeFileSync } from "node:fs";
 import { newsSeed, publicationsSeed, teamSeed } from "../app/content/seed.ts";
 
-const projectId = process.env.SANITY_PROJECT_ID;
-const dataset = process.env.SANITY_DATASET ?? "production";
-const token = process.env.SANITY_WRITE_TOKEN;
-const replace = process.argv.includes("--replace");
-
-if (!projectId || !token) {
-  console.error("Set SANITY_PROJECT_ID and SANITY_WRITE_TOKEN before running this script.");
-  process.exit(64);
-}
-
-const client = createClient({ projectId, dataset, token, apiVersion: "2025-01-01", useCdn: false });
+const outPath = process.argv[2] ?? "studio/.seed.ndjson";
 
 /** Stable, readable document id derived from a source URL or name. */
 const slug = (value) =>
   value.toLowerCase().replace(/^https?:\/\//, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60);
 
 const docs = [
-  ...newsSeed.map((n, i) => ({ _id: `news-${slug(n.url)}`, _type: "newsItem", orderRank: i + 1, ...n })),
-  ...publicationsSeed.map((p, i) => ({ _id: `pub-${slug(p.url)}`, _type: "publication", orderRank: i + 1, ...p })),
+  ...newsSeed.map((n, i) => ({
+    _id: `news-${slug(n.url)}`,
+    _type: "newsItem",
+    orderRank: i + 1,
+    type: n.type,
+    source: n.source,
+    title: n.title,
+    url: n.url,
+  })),
+  ...publicationsSeed.map((p, i) => ({
+    _id: `pub-${slug(p.url)}`,
+    _type: "publication",
+    orderRank: i + 1,
+    year: p.year,
+    journal: p.journal,
+    title: p.title,
+    authors: p.authors,
+    detail: p.detail,
+    url: p.url,
+  })),
   ...teamSeed.map((m, i) => ({
     _id: `team-${slug(m.name)}`,
     _type: "teamMember",
@@ -41,20 +49,14 @@ const docs = [
     note: m.note,
     group: m.group,
     linkedin: m.linkedin,
-    // Portraits stay as shipped files until someone uploads a replacement in the Studio.
+    // Portraits stay as the files shipped with the site until someone
+    // uploads a replacement in the Studio.
     imagePath: m.image,
   })),
 ];
 
-const tx = docs.reduce((t, doc) => (replace ? t.createOrReplace(doc) : t.createIfNotExists(doc)), client.transaction());
+writeFileSync(outPath, docs.map((d) => JSON.stringify(d)).join("\n") + "\n");
 
-try {
-  await tx.commit();
-  const counts = docs.reduce((acc, d) => ({ ...acc, [d._type]: (acc[d._type] ?? 0) + 1 }), {});
-  console.log(`Imported into ${projectId}/${dataset} (${replace ? "replace" : "create-if-missing"}):`);
-  for (const [type, n] of Object.entries(counts)) console.log(`  ${type}: ${n}`);
-  console.log("\nNext: set SANITY_PROJECT_ID in app/lib/sanity.ts, then reload the site.");
-} catch (error) {
-  console.error("Import failed:", error.message);
-  process.exit(1);
-}
+const counts = docs.reduce((acc, d) => ({ ...acc, [d._type]: (acc[d._type] ?? 0) + 1 }), {});
+console.log(`Wrote ${docs.length} documents to ${outPath}`);
+for (const [type, n] of Object.entries(counts)) console.log(`  ${type}: ${n}`);

@@ -3,6 +3,10 @@ import Image from "next/image";
 import { ArrowIcon, PageShell } from "../components/SiteChrome";
 import { getTeam, type TeamMember } from "../lib/content";
 
+// Rendered per request so CMS edits appear without a redeploy. Without this
+// the page is statically prerendered and content is baked into the artifact.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "About",
   description: "The Elymus team: founders, executive leadership, and scientific, medical, and business advisors.",

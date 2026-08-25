@@ -8,11 +8,11 @@ import { createClient } from "@sanity/client";
  * public dataset need no token, which is why nothing secret has to exist at
  * runtime on the Worker.
  *
- * Fill PROJECT_ID in after running `npx sanity init` in `studio/`.
- * Until it is set, the site falls back to the seed content in app/content/.
+ * If PROJECT_ID is blank the site falls back to the seed content in
+ * app/content/, so it always renders even without a CMS.
  */
-export const SANITY_PROJECT_ID = "";
-export const SANITY_DATASET = "production";
+export const SANITY_PROJECT_ID: string = "2hp0kt0w";
+export const SANITY_DATASET: string = "production";
 
 // Pin the API date. Bumping it opts into Sanity's newer query behaviour and
 // should be a deliberate change, never an accidental one.
@@ -40,7 +40,10 @@ export const sanityClient = isSanityConfigured
 export async function sanityFetch<T>(query: string, params: Record<string, unknown> = {}): Promise<T | null> {
   if (!sanityClient) return null;
   try {
-    return await sanityClient.fetch<T>(query, params);
+    // `no-store` opts out of Next's Data Cache, which would otherwise pin the
+    // first response indefinitely and make CMS edits never appear. Freshness is
+    // still bounded by Sanity's own CDN (~60s), which absorbs the load.
+    return await sanityClient.fetch<T>(query, params, { cache: "no-store" });
   } catch (error) {
     console.error("Sanity query failed; falling back to seed content.", error);
     return null;

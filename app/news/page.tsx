@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { ArrowIcon, PageShell } from "../components/SiteChrome";
 import { getNews } from "../lib/content";
 
+// Rendered per request so CMS edits appear without a redeploy. Without this
+// the page is statically prerendered and content is baked into the artifact.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "News",
   description: "Independent coverage and conversations about the research behind Elymus.",
