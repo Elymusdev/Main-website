@@ -19,7 +19,7 @@ export default async function Home() {
           <div className="button-row"><Link className="button primary" href="/science">{c.heroPrimaryCta} <ArrowIcon /></Link><Link className="button ghost" href="/pipeline">{c.heroSecondaryCta}</Link></div>
           <div className="hero-proof">{c.heroProof.map((p) => <span key={p.label}><b>{p.label}</b> {p.text}</span>)}</div>
         </div>
-        <div className="hero-art" aria-hidden="true"><Image className="hero-bottlebrush" src="/science/bottlebrush-macromolecule.png" width={1126} height={1324} alt="" priority unoptimized /><p><Lines text={c.heroArtCaption} /></p></div>
+        <div className="hero-art" aria-hidden="true"><Image className="hero-bottlebrush" src="/science/bottlebrush-macromolecule.png" width={1126} height={1324} alt="" priority /><p><Lines text={c.heroArtCaption} /></p></div>
       </section>
 
       <section className="intro-grid section-pad">

@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   title: { default: "Elymus | Muscle membrane science", template: "%s | Elymus" },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
-  other: { "codex-preview": "development" },
   icons: { icon: "/elymus-logo.png", shortcut: "/elymus-logo.png" },
   // No `images` yet: the only brand asset is a 1130x2048 portrait mark, which
   // social cards crop badly. Add a 1200x630 image here — plus `metadataBase`

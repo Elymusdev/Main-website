@@ -14,7 +14,7 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <Link className="brand" href="/" aria-label="Elymus home">
-        <Image className="brand-mark" src="/elymus-mark.png" width={1130} height={2048} alt="" priority unoptimized />
+        <Image className="brand-mark" src="/elymus-mark.png" width={1130} height={2048} alt="" priority />
         <span><strong>elymus</strong></span>
       </Link>
       <nav aria-label="Primary navigation">{nav.map(({ label, href }) => <Link key={href} href={href}>{label}</Link>)}</nav>

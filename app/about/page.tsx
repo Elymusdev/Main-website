@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 function Person({ p }: { p: TeamMember }) {
-  return <article className="person"><Image src={p.image} width={520} height={520} alt={p.name} unoptimized/><div><p>{p.role}</p><h3>{p.name}</h3><small>{p.note}</small><a href={p.linkedin} target="_blank" rel="noreferrer" aria-label={`${p.name} on LinkedIn`}>LinkedIn <ArrowIcon /></a></div></article>;
+  return <article className="person"><Image src={p.image} width={520} height={520} alt={p.name}/><div><p>{p.role}</p><h3>{p.name}</h3><small>{p.note}</small><a href={p.linkedin} target="_blank" rel="noreferrer" aria-label={`${p.name} on LinkedIn`}>LinkedIn <ArrowIcon /></a></div></article>;
 }
 
 export default async function About() {

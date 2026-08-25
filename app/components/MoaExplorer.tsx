@@ -53,7 +53,6 @@ export default function MoaExplorer({ compact = false, variant = "standard" }: {
             ? "Elymer proposed mechanism of action showing three hypotheses for how the polymer may interact with the lipid bilayer: patch, repair, and heal"
             : "Three-step Elymer proposed mechanism of action showing a connected membrane, DMD membrane instability, and proposed bottlebrush-based membrane support"}
           priority={compact}
-          unoptimized
         />
         <div className="moa-panel-focus" aria-hidden="true" />
         <div className="moa-status" id={panelId} role="tabpanel" aria-labelledby={tabId(active)} aria-live="polite"><span>{steps[active].n}</span><strong>{steps[active].title}</strong></div>

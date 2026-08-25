@@ -1,8 +1,7 @@
 # Elymus Therapeutics — website
 
-Marketing site for Elymus Therapeutics, built on
-[vinext](https://github.com/cloudflare/vinext) (Next.js App Router running on a
-Cloudflare Worker) with React 19 and Tailwind 4.
+Marketing site for Elymus Therapeutics. Next.js 16 (App Router) with React 19
+and Tailwind 4, content managed in Sanity, deployed on Vercel.
 
 ## Prerequisites
 
@@ -14,9 +13,6 @@ Cloudflare Worker) with React 19 and Tailwind 4.
 npm install
 npm run dev
 ```
-
-The dev server prints its URL (default `http://localhost:5173`). Pass
-`-- --port 5174` to choose a different port.
 
 ## Structure
 
@@ -30,16 +26,12 @@ app/                 pages and components (Next.js App Router)
   news/              press and podcast coverage
   contact/           inquiry form (mailto-based)
   components/        SiteChrome (nav/footer/shell), MoaExplorer, InquiryForm
-  content/            default copy (seed.ts = lists, pages.ts = page copy)
+  content/           default copy (seed.ts = lists, pages.ts = page copy)
   lib/               Sanity client and content accessors
   globals.css        all site styling
 public/              images served at the site root
-worker/index.ts      Cloudflare Worker entry, incl. image optimization
-build/               Vite plugin that packages the Sites artifact
-scripts/             install / build / validate helpers, CMS import
+scripts/             CMS import helper
 studio/              Sanity Studio (separate workspace, own package.json)
-tests/               rendered-HTML check against the built artifact
-.openai/hosting.json Sites project id and optional D1/R2 bindings
 ```
 
 ## Content
@@ -54,37 +46,30 @@ Defaults live in `app/content/seed.ts` (lists) and `app/content/pages.ts`
 field blank, the site renders those defaults rather than breaking.
 
 CMS-backed pages set `export const dynamic = "force-dynamic"`. Without it Next
-statically prerenders them and bakes content into the deployed artifact, so
-editor changes would never appear.
+statically prerenders them and bakes content into the build, so editor changes
+would never appear.
+
+Sanity project id and dataset are public values and live in `app/lib/sanity.ts`.
+Reads use a public dataset, so no API token is needed at runtime.
 
 ## Commands
 
-- `npm run dev` — start the Vite/vinext development server
-- `npm run build` — build and validate the deployable Sites artifact
-- `npm run start` — serve the built application
-- `npm test` — build, then verify the rendered preview metadata
-- `npm run validate:artifact` — recheck an existing artifact's manifest and ESM `default.fetch` export
+- `npm run dev` — development server
+- `npm run build` — production build
+- `npm start` — serve the production build
 - `npm run lint` — ESLint
-- `npm run cms:seed` — one-time import of `app/content/seed.ts` into Sanity
+- `npm run cms:seed` — one-time import of the default content into Sanity
 
-`npm run install:ci`, `npm run build`, and `npm run lint` route through
-`scripts/sites-env.sh`, which keeps npm, XDG, and temp paths inside the checkout
-under the git-ignored `.sites-runtime/`. The build helpers use GNU `timeout` and
-`flock` and are intended for the Linux CI image, not macOS; on macOS use
-`npm run dev` and `npm install` directly.
+## Deployment
 
-The remote Sites builder runs `npm run build` against the pushed commit, so
-building locally is only needed to diagnose a remote failure.
+Deployed on **Vercel**, which detects Next.js automatically — no `vercel.json`
+needed. Push to `main` and Vercel builds and deploys.
 
-## Deployment notes
+Images are optimized by Vercel. `next.config.ts` allows `cdn.sanity.io` as a
+remote source for team portraits uploaded in the Studio; everything else is
+served from `public/`.
 
-- `.openai/hosting.json` carries the Sites `project_id`; keep it in version control.
-- `vite.config.ts` simulates any declared D1/R2 bindings for local development.
-  Both are currently `null`.
-- Timeout defaults can be overridden with `SITES_INSTALL_TIMEOUT`,
-  `SITES_INSTALL_KILL_AFTER`, `SITES_BUILD_TIMEOUT`, and `SITES_BUILD_KILL_AFTER`.
-  A timeout fails the command; the helpers never retry.
-
-## Learn more
-
-- [vinext documentation](https://github.com/cloudflare/vinext)
+> This project previously targeted Cloudflare Workers via `vinext`, with the
+> `worker/`, `build/` and `.openai/` directories and a Worker-artifact build.
+> Those were removed in the move to Vercel; see git history if that setup is
+> ever needed again.
