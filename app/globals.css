@@ -183,3 +183,50 @@
     margin: 14px 0;
   }
 }
+
+/* ------------------------------------------------------------------ *
+ * Heading line-height sweep
+ *
+ * These headings never set line-height, so they inherited the body's 1.6.
+ * On large display type that is far too loose: "Membrane instability extends
+ * beyond DMD" rendered as five 96px-tall lines on a phone. Tightening also
+ * fixes desktop, where the same rule applies.
+ *
+ * Font sizes are only reduced under 900px, so the desktop scale is unchanged.
+ * ------------------------------------------------------------------ */
+.horizon h2 { line-height: 1.05; }
+.values h2 { line-height: 1.05; }
+.page-cta h2 { line-height: 1.08; }
+.contact-intro h2 { line-height: 1.06; }
+.contact-audiences h3 { line-height: 1.2; }
+.contact-grid h3 { line-height: 1.2; }
+.person h3 { line-height: 1.15; }
+.feature-row b { line-height: 1.25; }
+.horizon-grid b { line-height: 1.25; }
+.moa-controls button strong { line-height: 1.15; }
+
+@media (max-width: 900px) {
+  /* Fixed 50-64px display sizes with no mobile scaling. */
+  .horizon h2 { font-size: clamp(30px, 8vw, 60px); }
+  .values h2 { font-size: clamp(32px, 8.5vw, 64px); }
+  .page-cta h2 { font-size: clamp(28px, 7.5vw, 50px); }
+  /* Base clamp floors at 48px, so it never scaled down either. */
+  .contact-intro h2 { font-size: clamp(28px, 7.5vw, 48px); }
+  .contact-audiences h3 { font-size: clamp(22px, 5.5vw, 30px); }
+}
+
+/* Tightening the line-height above removed the half-leading these headings
+   were relying on for separation — Tailwind's preflight zeroes heading
+   margins, so several sat flush against the next element. Make the spacing
+   explicit instead of a side effect of the line box. */
+.horizon h2 { margin: 0 0 34px; }
+.values h2 { margin: 0 0 18px; }
+.contact-audiences h3 { margin: 0 0 10px; }
+.person h3 { margin: 8px 0 10px; }
+.feature-row b { display: block; margin-bottom: 10px; }
+
+@media (max-width: 900px) {
+  .horizon h2 { margin-bottom: 26px; }
+  /* .page-cta is flex with a 28px gap on desktop, but display:block here. */
+  .page-cta h2 { margin-bottom: 24px; }
+}
