@@ -91,3 +91,33 @@
   .nav-cta { padding: 13px 21px; }
   .news-list > a { padding: 30px 0; }
 }
+
+/* Mechanism explorer steps.
+   The base rule lays each step out as a grid (35px number column + text). The
+   <=900px rule sets `display:block`, which drops the grid and lets the number,
+   title and description run together on one line ("01Patch The polymer may…").
+   Stack them explicitly instead. */
+@media (max-width: 900px) {
+  .moa-controls button {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 22px;
+  }
+  .moa-controls button span {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .16em;
+  }
+  .moa-controls button strong {
+    display: block;
+    font-size: 23px;
+    line-height: 1.15;
+  }
+  .moa-controls button small {
+    display: block;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+}
