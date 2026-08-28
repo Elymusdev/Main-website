@@ -161,3 +161,25 @@
   /* Let the copy wrap naturally instead of honouring the desktop line break. */
   .closing-cta h2 br { display: none; }
 }
+
+/* Platform cards ("Broad reach" / "Unique performance" / "Rigorous science").
+   h3 had no line-height, so it inherited the body's 1.6. "Unique performance"
+   wrapped into two widely spaced lines, which pushed its body copy out of
+   alignment with the neighbouring cards on desktop and made that card 61px
+   taller than the others. */
+.platform-cards h3 {
+  line-height: 1.1;
+}
+
+@media (max-width: 900px) {
+  .platform-cards article {
+    /* 82px of vertical padding made this section 1372px tall on a phone for
+       three short cards, and 4vw horizontal (15.6px) was narrower than the
+       22px every other section uses. */
+    padding: 46px 22px;
+  }
+  .platform-cards h3 {
+    font-size: clamp(26px, 7vw, 38px);
+    margin: 14px 0;
+  }
+}
