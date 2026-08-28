@@ -40,8 +40,15 @@ export async function SiteFooter() {
 export function PageShell({ children }: { children: React.ReactNode }) { return <><SiteHeader /><main>{children}</main><SiteFooter /></>; }
 export function ArrowIcon() { return <span aria-hidden="true">↗</span>; }
 
-/** Renders newlines in editor-supplied copy as <br/>, so headings keep their line breaks. */
+/**
+ * Renders newlines in editor-supplied copy as <br/>, so headings keep their
+ * line breaks.
+ *
+ * A space follows each <br/> so the words stay separated if a stylesheet hides
+ * the break on narrow screens (see `.closing-cta h2 br`). At a line end that
+ * space collapses, so it changes nothing when the break is showing.
+ */
 export function Lines({ text }: { text: string }) {
   const parts = text.split("\n");
-  return <>{parts.map((line, i) => <span key={i}>{line}{i < parts.length - 1 ? <br/> : null}</span>)}</>;
+  return <>{parts.map((line, i) => <span key={i}>{line}{i < parts.length - 1 ? <><br/>{" "}</> : null}</span>)}</>;
 }

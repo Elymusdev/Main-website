@@ -147,3 +147,17 @@
   .chart-labels { line-height: 1.3; }
   .chart-labels span { overflow-wrap: break-word; }
 }
+
+/* Closing call to action.
+   The base clamp()'s 48px floor meant this heading never scaled down on a
+   phone: "macromolecules" ran the full width and the heading took five lines.
+   The authored break after "interface" also stranded "of" on its own line.
+   Scoped to phones so the desktop sizing curve is untouched. */
+@media (max-width: 640px) {
+  .closing-cta h2 {
+    font-size: clamp(28px, 8vw, 44px);
+    line-height: 1.08;
+  }
+  /* Let the copy wrap naturally instead of honouring the desktop line break. */
+  .closing-cta h2 br { display: none; }
+}
