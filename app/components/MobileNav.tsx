@@ -17,9 +17,6 @@ import { createPortal } from "react-dom";
  */
 export default function MobileNav({ items }: { items: { label: string; href: string }[] }) {
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!open) return;
@@ -35,7 +32,7 @@ export default function MobileNav({ items }: { items: { label: string; href: str
   }, [open]);
 
   const panel = (
-    <div id="mobile-nav" className="mobile-nav" hidden={!open}>
+    <div id="mobile-nav" className="mobile-nav">
       <nav aria-label="Site navigation">
         {items.map((item) => (
           <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</Link>
@@ -57,7 +54,10 @@ export default function MobileNav({ items }: { items: { label: string; href: str
       >
         <span /><span /><span />
       </button>
-      {mounted ? createPortal(panel, document.body) : null}
+      {/* Portalled only while open. `open` is false on the server and on the
+          first client render, so hydration matches; by the time it flips, the
+          click has happened and `document` is available. */}
+      {open ? createPortal(panel, document.body) : null}
     </>
   );
 }
