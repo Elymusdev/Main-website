@@ -44,11 +44,21 @@
     font-size: 19px; font-weight: 600; color: #24384d;
     border-bottom: 1px solid var(--line);
   }
-  .mobile-nav-cta {
-    justify-content: center; margin-top: 26px; border-bottom: 0;
-    background: var(--navy); color: #fff; border-radius: 99px;
-    font-size: 15px; font-weight: 700;
+  /* Needs to out-specify `.mobile-nav a` (0,1,1), which would otherwise keep
+     the dark link colour and the divider border on the button. */
+  .mobile-nav a.mobile-nav-cta {
+    justify-content: center;
+    margin-top: 30px;
+    min-height: 56px;
+    border-bottom: 0;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 99px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .01em;
   }
+  .mobile-nav a.mobile-nav-cta:active { background: #0d2f5c; }
   /* Connect lives in the menu on mobile, so the header keeps just the logo. */
   .site-header .nav-cta { display: none; }
 }
