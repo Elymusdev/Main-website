@@ -31,16 +31,26 @@
   .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
   .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+  /* Portalled to <body>, so it sizes against the viewport and can sit above
+     the sticky header (z-index 20) rather than under it. */
   .mobile-nav {
-    position: fixed; inset: 76px 0 0; z-index: 19;
+    position: fixed; inset: 76px 0 0; z-index: 30;
     background: #fff; padding: 8px 22px 32px; overflow-y: auto;
   }
+  .mobile-nav[hidden] { display: none; }
   .mobile-nav nav { display: flex; flex-direction: column; }
   .mobile-nav a {
     display: flex; align-items: center; min-height: 56px;
     font-size: 19px; font-weight: 600; color: #24384d;
     border-bottom: 1px solid var(--line);
   }
+  .mobile-nav-cta {
+    justify-content: center; margin-top: 26px; border-bottom: 0;
+    background: var(--navy); color: #fff; border-radius: 99px;
+    font-size: 15px; font-weight: 700;
+  }
+  /* Connect lives in the menu on mobile, so the header keeps just the logo. */
+  .site-header .nav-cta { display: none; }
 }
 
 /* Readability floor for phones AND tablets: several labels are 8-10px in the

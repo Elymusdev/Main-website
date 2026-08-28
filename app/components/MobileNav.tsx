@@ -2,16 +2,24 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 /**
  * Header navigation for narrow screens.
  *
- * Below 900px the desktop nav is hidden by CSS, so without this the only links
- * in the header are the logo and "Connect" — leaving several pages reachable
- * only from the footer.
+ * Below 900px the desktop nav is hidden by CSS, so without this the only link
+ * in the header is the logo — leaving several pages reachable only from the footer.
+ *
+ * The panel is portalled to <body> rather than rendered in place: the header
+ * sets `backdrop-filter`, which makes it the containing block for any
+ * `position: fixed` descendant. Left inside, the panel sizes itself against the
+ * 76px header instead of the viewport and collapses to a thin strip.
  */
 export default function MobileNav({ items }: { items: { label: string; href: string }[] }) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!open) return;
@@ -26,6 +34,17 @@ export default function MobileNav({ items }: { items: { label: string; href: str
     };
   }, [open]);
 
+  const panel = (
+    <div id="mobile-nav" className="mobile-nav" hidden={!open}>
+      <nav aria-label="Site navigation">
+        {items.map((item) => (
+          <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</Link>
+        ))}
+        <Link className="mobile-nav-cta" href="/contact" onClick={() => setOpen(false)}>Connect</Link>
+      </nav>
+    </div>
+  );
+
   return (
     <>
       <button
@@ -38,14 +57,7 @@ export default function MobileNav({ items }: { items: { label: string; href: str
       >
         <span /><span /><span />
       </button>
-      <div id="mobile-nav" className="mobile-nav" hidden={!open}>
-        <nav aria-label="Site navigation">
-          {items.map((item) => (
-            <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</Link>
-          ))}
-          <Link href="/contact" onClick={() => setOpen(false)}>Contact</Link>
-        </nav>
-      </div>
+      {mounted ? createPortal(panel, document.body) : null}
     </>
   );
 }
