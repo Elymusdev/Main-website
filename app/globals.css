@@ -236,3 +236,29 @@
 @media (max-width: 900px) {
   .dmd-copy h2 { font-size: clamp(26px, 6.8vw, 42px); }
 }
+
+/* ------------------------------------------------------------------ *
+ * Remaining fixed / floored type sizes
+ *
+ * From a full inventory of 104 text elements across all seven pages:
+ * these either had a fixed px size or a clamp() whose floor sat above the
+ * vw term, so none of them scaled on a phone. Desktop is unchanged.
+ * ------------------------------------------------------------------ */
+@media (max-width: 900px) {
+  /* 35px fixed: news headlines ran to 5-7 lines each. */
+  .news-list h2 { font-size: clamp(21px, 5.6vw, 35px); }
+  /* 32px fixed: publication titles ran to 4-6 lines. */
+  .publication-list h2 { font-size: clamp(20px, 5.3vw, 32px); }
+  /* clamp floors at 42px: this was the worst on the site at ten lines. */
+  .science-band > h2 { font-size: clamp(24px, 6.2vw, 42px); }
+  /* clamp floors at 39-40px. */
+  .intro-grid h2,
+  .science-primer h2,
+  .evidence h2 { font-size: clamp(26px, 6.8vw, 40px); }
+  .section-heading h2 { font-size: clamp(26px, 6.8vw, 39px); }
+}
+
+@media (max-width: 560px) {
+  /* Last item under the 11px readability floor. */
+  .mini-pipeline { font-size: 11px; }
+}
