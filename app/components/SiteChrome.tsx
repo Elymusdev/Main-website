@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getSiteSettings } from "../lib/content";
+import MobileNav from "./MobileNav";
 
 const nav = [
   { label: "Science", href: "/science" },
@@ -20,6 +21,7 @@ export async function SiteHeader() {
       </Link>
       <nav aria-label="Primary navigation">{nav.map(({ label, href }) => <Link key={href} href={href}>{label}</Link>)}</nav>
       <Link className="nav-cta" href="/contact">Connect</Link>
+      <MobileNav items={nav} />
     </header>
   );
 }
@@ -29,7 +31,7 @@ export async function SiteFooter() {
   return (
     <footer className="site-footer">
       <div><Link className="footer-brand" href="/">elymus</Link><p>{s.footerTagline}</p></div>
-      <div className="footer-links"><Link href="/science">Science</Link><Link href="/pipeline">Pipeline</Link><Link href="/about">Team</Link><Link href="/contact">Contact</Link></div>
+      <div className="footer-links">{nav.map(({ label, href }) => <Link key={href} href={href}>{label}</Link>)}<Link href="/contact">Contact</Link></div>
       <p className="fine-print">{s.footerFinePrint}</p>
     </footer>
   );
