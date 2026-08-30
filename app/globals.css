@@ -318,3 +318,39 @@
   .horizon h2 { margin-bottom: 26px; }
   .page-cta h2 { margin-bottom: 24px; }
 }
+
+/* ------------------------------------------------------------------ *
+ * Two-column sections when they stack
+ *
+ * These use a vw gap sized as a COLUMN gap for the desktop two-column
+ * layout. Below 900px they collapse to one column and that same value
+ * becomes the ROW gap, so the space between a heading and its body copy
+ * scales with viewport width — 35px at 390px growing to 81px at 899px.
+ *
+ * .intro-grid and .science-primer add a further 41px `padding-top` on the
+ * second column, which exists only to drop the body text below the heading
+ * in the two-column layout. Stacked, it is dead space on top of the row
+ * gap: 76px between "Protecting the membrane..." and its paragraph.
+ *
+ * Use a fixed row gap when stacked, and drop the column offset.
+ * ------------------------------------------------------------------ */
+@media (max-width: 900px) {
+  .intro-grid,
+  .science-primer,
+  .evidence,
+  .contact-grid,
+  .contact-page,
+  .pipeline-strip {
+    row-gap: 24px;
+  }
+
+  .intro-grid > div:last-child,
+  .science-primer > div:last-child,
+  .contact-page > div:last-child {
+    padding-top: 0;
+  }
+
+  /* The pipeline chart and the arrow link read as separate blocks, so they
+     keep a little more air than a heading/body pair. */
+  .pipeline-strip { row-gap: 32px; }
+}
