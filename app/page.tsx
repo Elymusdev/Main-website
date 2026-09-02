@@ -25,7 +25,7 @@ export default async function Home() {
       <section className="intro-grid section-pad">
         <div><p className="eyebrow">{c.introEyebrow}</p><h2>{c.introHeading}</h2></div>
         {/* The branded "Elymers" phrase keeps its styling in code; the surrounding sentence is editable. */}
-        <div><p>{c.introBodyBefore} <span className="elymers-phrase">macromolecules, <strong className="elymers-emphasis">Elymers</strong>,</span> {c.introBodyAfter}</p><Link className="text-link" href="/science">{c.introLink} <ArrowIcon /></Link></div>
+        <div><p>{c.introBodyBefore} <span className="elymers-phrase">macromolecules, <strong className="elymers-emphasis">Elymers™</strong>,</span> {c.introBodyAfter}</p><Link className="text-link" href="/science">{c.introLink} <ArrowIcon /></Link></div>
       </section>
 
       <section className="moa-home section-pad">
@@ -41,6 +41,11 @@ export default async function Home() {
         <div><p className="eyebrow">{c.stripEyebrow}</p><h2>{c.stripHeading}</h2><p>{c.stripText}</p></div>
         <div className="mini-pipeline">{c.stripStages.map((s) => <span key={s.label}>{s.label} <i className={s.state || undefined}/></span>)}</div>
         <Link className="circle-link" href="/pipeline" aria-label="View pipeline"><ArrowIcon /></Link>
+      </section>
+
+      <section className="podcast-strip section-pad">
+        <div><p className="eyebrow">{c.podcastEyebrow}</p><small>{c.podcastSource}</small></div>
+        <a href={c.podcastUrl} target="_blank" rel="noreferrer"><h2>{c.podcastHeading}</h2><span className="text-link">{c.podcastCta} <ArrowIcon /></span></a>
       </section>
 
       <section className="closing-cta closing-cta-left section-pad"><h2><Lines text={c.closingHeading} /></h2><Link className="button white" href="/contact">{c.closingCta} <ArrowIcon /></Link></section>

@@ -17,7 +17,7 @@ export default async function Contact() {
   return <PageShell>
     <section className="page-hero contact-hero"><p className="eyebrow light">{c.heroEyebrow}</p><h1><Lines text={c.heroHeading} /></h1><p>{c.heroText}</p></section>
     <section className="contact-page section-pad">
-      <div className="contact-intro"><p className="eyebrow">{c.introEyebrow}</p><h2>{c.introHeading}</h2><p>{c.introText}</p><div className="contact-topics">{c.topics.map((t) => <span key={t}>{t}</span>)}</div></div>
+      <div className="contact-intro"><p className="eyebrow">{c.introEyebrow}</p><h2>{c.introHeading}</h2><p>{c.introText}</p></div>
       <InquiryForm inquiryTypes={c.inquiryTypes} contactEmail={settings.contactEmail} />
     </section>
     <section className="contact-grid contact-audiences section-pad">{c.audiences.map((a) => <div key={a.heading}><h3>{a.heading}</h3><p>{a.text}</p></div>)}</section>

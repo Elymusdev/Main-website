@@ -126,6 +126,11 @@ export const homePage = singleton("homePage", "Home page", [
       }),
     ],
   }),
+  str("podcastEyebrow", "Podcast eyebrow"),
+  txt("podcastHeading", "Podcast episode title"),
+  str("podcastSource", "Podcast show and episode"),
+  str("podcastCta", "Podcast link label"),
+  str("podcastUrl", "Podcast episode URL"),
   heading("closingHeading", "Closing heading"),
   str("closingCta", "Closing button label"),
 ]);
@@ -208,7 +213,6 @@ export const contactPage = singleton("contactPage", "Contact page", [
   str("introEyebrow", "Intro eyebrow"),
   str("introHeading", "Intro heading"),
   txt("introText", "Intro text"),
-  strings("topics", "Topic chips", "The pills shown beside the form."),
   strings("inquiryTypes", "Inquiry dropdown options", "Options in the form's “Inquiry type” menu."),
   defineField({
     name: "audiences",

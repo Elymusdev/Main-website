@@ -93,11 +93,11 @@ export const publicationsSeed: Publication[] = [
 ];
 
 export const teamSeed: TeamMember[] = [
-  { name: "Nithya Iyer Singh", role: "Chief Executive Officer", note: "Co-founder, 2123iX · GSK, Tesaro, Medco", image: "/team/nithya.png", linkedin: "https://www.linkedin.com/in/nithyaiyersingh/", group: "leadership" },
+  { name: "Nithya Iyer Singh", role: "CEO & Co-founder", note: "Co-founder: 2123iX, GSK, Tesaro, Medco", image: "/team/nithya.png", linkedin: "https://www.linkedin.com/in/nithyaiyersingh/", group: "leadership" },
   { name: "Frank Bates", role: "Co-founder · Regents Professor", note: "Chemical Engineering & Materials Science, University of Minnesota", image: "/team/frank.png", linkedin: "https://www.linkedin.com/in/frank-bates-6794a621a/", group: "leadership" },
   { name: "Ben Hackel", role: "Co-founder · Professor", note: "Chemical Engineering & Materials Science, University of Minnesota", image: "/team/ben.png", linkedin: "https://www.linkedin.com/in/benjamin-hackel-5a366225/", group: "leadership" },
   { name: "Tim Lodge", role: "Co-founder · Regents Professor", note: "Chemistry and Chemical Engineering & Materials Science, University of Minnesota", image: "/team/tim.png", linkedin: "https://www.linkedin.com/in/tim-lodge-a728ab268/", group: "leadership" },
-  { name: "Joe Metzger", role: "Professor; Dept. Head & Chair", note: "Integrative Biology & Physiology, University of Minnesota", image: "/team/joe.png", linkedin: "https://www.linkedin.com/school/university-of-minnesota-medical-school", group: "advisor" },
-  { name: "Demetris Yannopoulos, MD", role: "Professor of Medicine", note: "Research Director, Interventional Cardiology; Director, Resuscitation Medicine", image: "/team/demetris.png", linkedin: "https://www.linkedin.com/in/demetris-yannopoulos-b110518a/", group: "advisor" },
+  { name: "Joe Metzger", role: "Professor: Dept. Head & Chair", note: "Integrative Biology & Physiology, University of Minnesota", image: "/team/joe.png", linkedin: "https://www.linkedin.com/school/university-of-minnesota-medical-school", group: "advisor" },
+  { name: "Demetris Yannopoulos, MD", role: "Professor of Medicine", note: "Research Director: Interventional Cardiology; Director: Resuscitation Medicine", image: "/team/demetris.png", linkedin: "https://www.linkedin.com/in/demetris-yannopoulos-b110518a/", group: "advisor" },
   { name: "Navjot Singh", role: "Business Advisor", note: "Co-founder & CEO, 2123iX; Senior Partner Emeritus, McKinsey", image: "/team/navjot.png", linkedin: "https://www.linkedin.com/in/navjot-singh-imagine/", group: "advisor" },
 ];

@@ -6,13 +6,13 @@ import { useId, useRef, useState } from "react";
 const standardSteps = [
   { n: "01", title: "Connected membrane", text: "Dystrophin provides normal mechanical support by linking the membrane and actin cytoskeleton." },
   { n: "02", title: "Membrane instability", text: "In DMD, dystrophin loss leaves the sarcolemma vulnerable to disruption and calcium influx." },
-  { n: "03", title: "Proposed Elymer support", text: "Bottlebrush-based physical stabilization may reinforce the membrane and limit defect expansion." },
+  { n: "03", title: "Proposed Elymer™ support", text: "Bottlebrush-based physical stabilization may reinforce the membrane and limit defect expansion." },
 ];
 
 const hypothesisSteps = [
-  { n: "01", title: "Patch", text: "The polymer may adsorb at a membrane defect, helping patch the lipid bilayer and limit calcium ion flux." },
-  { n: "02", title: "Repair", text: "The polymer may support repair of the disrupted lipid bilayer at the damaged site." },
-  { n: "03", title: "Healed", text: "Following repair, the polymer may desorb, leaving a healed lipid bilayer." },
+  { n: "01", title: "Patch", text: "The molecule adsorbs at the membrane defect, helping patch the lipid bilayer and limit calcium ion flux." },
+  { n: "02", title: "Repair", text: "The molecule may support repair of the disrupted lipid bilayer at the damaged site." },
+  { n: "03", title: "Healed", text: "Following repair, the molecule may desorb, leaving a healed lipid bilayer." },
 ];
 
 export default function MoaExplorer({
@@ -59,8 +59,8 @@ export default function MoaExplorer({
           width={image.width}
           height={image.height}
           alt={isHypotheses
-            ? "Elymer proposed mechanism of action showing three hypotheses for how the polymer may interact with the lipid bilayer: patch, repair, and heal"
-            : "Three-step Elymer proposed mechanism of action showing a connected membrane, DMD membrane instability, and proposed bottlebrush-based membrane support"}
+            ? "Elymer™ proposed mechanism of action showing the hypothesized action of the macromolecule on the lipid bilayer: patch, repair, and heal"
+            : "Three-step Elymer™ proposed mechanism of action showing a connected membrane, DMD membrane instability, and proposed bottlebrush-based membrane support"}
           priority={compact}
         />
         <div className="moa-panel-focus" aria-hidden="true" />

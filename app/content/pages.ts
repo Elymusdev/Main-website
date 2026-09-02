@@ -35,6 +35,11 @@ export type HomeContent = {
   stripHeading: string;
   stripText: string;
   stripStages: { label: string; state: "done" | "current" | "" }[];
+  podcastEyebrow: string;
+  podcastHeading: string;
+  podcastSource: string;
+  podcastCta: string;
+  podcastUrl: string;
   closingHeading: string;
   closingCta: string;
 };
@@ -99,7 +104,6 @@ export type ContactContent = {
   introEyebrow: string;
   introHeading: string;
   introText: string;
-  topics: string[];
   inquiryTypes: string[];
   audiences: { heading: string; text: string }[];
   disclosureHeading: string;
@@ -142,8 +146,8 @@ export const homeDefaults: HomeContent = {
   introBodyAfter: "designed to engage and stabilize the muscle membrane.",
   introLink: "How the platform works",
   moaEyebrow: "Mechanism overview",
-  moaHeading: "Elymer proposed mechanism of action",
-  moaDescription: "Three hypotheses for what the polymer may do on the lipid bilayer: patch, repair, and heal.",
+  moaHeading: "Elymer™ proposed mechanism of action",
+  moaDescription: "Hypothesis on action of the macromolecule on the lipid bilayer: patch, repair and heal.",
   cards: [
     {
       number: "01",
@@ -170,6 +174,11 @@ export const homeDefaults: HomeContent = {
     { label: "IND-enabling", state: "" },
     { label: "Clinical", state: "" },
   ],
+  podcastEyebrow: "Listen",
+  podcastHeading: "Bottlebrush block copolymer shields muscles and prevents DMD onset",
+  podcastSource: "Base by Base · Episode 173",
+  podcastCta: "Play the episode",
+  podcastUrl: "https://basebybase.castos.com/episodes/synthetic-bottlebrush-block-copolymer-prevents-disease-onset",
   closingHeading: "Science at the interface\nof macromolecules and biology",
   closingCta: "Connect with Elymus",
 };
@@ -183,19 +192,19 @@ export const scienceDefaults: ScienceContent = {
   primerHeading: "A fragile membrane sits at the center of muscle damage",
   primerBody: [
     "The sarcolemma is the membrane surrounding each muscle fiber. In Duchenne muscular dystrophy, the absence of functional dystrophin makes this membrane vulnerable to repeated contraction-induced damage.",
-    "That damage allows dysregulated movement of ions and other molecules across the membrane, contributing to progressive loss of functional muscle tissue.",
+    "This damage allows dysregulated movement of ions and other molecules across the membrane, contributing to progressive loss of functional muscle tissue.",
   ],
   bandEyebrow: "The Elymus platform",
   bandHeading:
-    "Elymers are engineered bottlebrush macromolecules designed to combine nanoscale architecture with membrane engagement",
+    "Elymers™ are engineered bottlebrush macromolecules designed to combine nanoscale architecture with membrane engagement",
   features: [
     { label: "Architecture", text: "A branched macromolecule format creates a dense, tunable molecular structure." },
-    { label: "Engagement", text: "Amphiphilic domains are designed to interact with the lipid bilayer." },
+    { label: "Engagement", text: "Amphiphilic structures are designed to interact with the lipid bilayer." },
     { label: "Protection", text: "The intended result is physical membrane stabilization under mechanical stress." },
   ],
   moaEyebrow: "Mechanism overview",
-  moaHeading: "Elymer proposed mechanism of action",
-  moaDescription: "Three hypotheses for what the polymer may do on the lipid bilayer: patch, repair, and heal.",
+  moaHeading: "Elymer™ proposed mechanism of action",
+  moaDescription: "Hypothesis on action of the macromolecule on the lipid bilayer: patch, repair and heal.",
   evidenceEyebrow: "Evidence framework",
   evidenceHeading: "From molecular behavior to physiological performance",
   evidenceSteps: [
@@ -224,8 +233,8 @@ export const pipelineDefaults: PipelineContent = {
   dmdEyebrow: "DMD background",
   dmdHeading: "Dystrophin is the molecular shock absorber for normal muscle cell membranes",
   dmdBody: [
-    "Duchenne muscular dystrophy is caused by mutations in a gene that result in absent or severely reduced dystrophin. Dystrophin helps connect the muscle cell cytoskeleton to the membrane associated protein complex, supporting the sarcolemma during repeated contraction. Without this support, the membrane becomes vulnerable to disruption and abnormal calcium entry. Repeated injury contributes to inflammation, loss of functional muscle tissue, progressive weakness, and loss of mobility.",
-    "Elymus is pursuing a physical membrane stabilization approach intended to address this downstream feature of DMD biology, independent of an individual mutation.",
+    "Duchenne muscular dystrophy is caused by mutations in a gene that results in absent or severely reduced dystrophin. Dystrophin helps connect the muscle cell cytoskeleton to the membrane associated protein complex, supporting the sarcolemma during repeated contraction. Without this support, the membrane becomes vulnerable to disruption and abnormal calcium entry. Repeated injury contributes to inflammation, loss of functional muscle tissue, progressive weakness, and loss of mobility.",
+    "Elymus is pursuing a physical membrane stabilization approach intended to address this downstream feature of DMD biology, which is mutation agnostic.",
   ],
   figures: [
     {
@@ -247,9 +256,9 @@ export const pipelineDefaults: PipelineContent = {
   horizonEyebrow: "Platform horizon",
   horizonHeading: "Membrane instability extends beyond DMD",
   horizonItems: [
-    { label: "Muscular dystrophies", text: "Core focus" },
-    { label: "Ischemic reperfusion injury", text: "Future research" },
-    { label: "Post trauma related injuries", text: "Future research" },
+    { label: "DMD", text: "Core focus" },
+    { label: "Other Muscular Dystrophies", text: "Future research" },
+    { label: "Undisclosed", text: "Future research" },
   ],
   horizonDisclosure: "Future indications are exploratory and do not represent active development programs.",
   ctaHeading: "Interested in the Elymus platform?",
@@ -280,7 +289,6 @@ export const contactDefaults: ContactContent = {
   introHeading: "Contact Elymus",
   introText:
     "Tell us a little about your inquiry and the Elymus team can direct it to the appropriate scientific or business contact.",
-  topics: ["Partnering", "Scientific collaboration", "Investment", "Media"],
   inquiryTypes: ["Partnering", "Scientific collaboration", "Investment", "Media", "DMD community", "Other"],
   audiences: [
     {
@@ -307,7 +315,7 @@ export const publicationsDefaults: SimplePageContent = {
   heroEyebrow: "Publications",
   heroHeading: "A peer-reviewed\nscientific foundation",
   heroText:
-    "Selected work underpinning the molecular architecture, membrane interaction, and preclinical promise of bottlebrush macromolecules.",
+    "Selected work underpinning the molecular architecture, membrane interaction, and the preclinical promise of bottlebrush macromolecules.",
   note: "Publications describe research conducted by academic investigators and collaborators. Findings from preclinical models may not translate to humans.",
 };
 
