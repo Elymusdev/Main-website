@@ -531,3 +531,34 @@
 .moa-hypotheses .moa-panel-focus { left: 25%; width: 26%; }
 .moa-hypotheses .moa-stage[data-step="1"] .moa-panel-focus { left: 51%; width: 26%; }
 .moa-hypotheses .moa-stage[data-step="2"] .moa-panel-focus { left: 77%; width: 22%; }
+
+/* ------------------------------------------------------------------ *
+ * Hero artwork on phones
+ *
+ * Stacked, .hero had no row gap, so the artwork block began on exactly
+ * the pixel where the "Preclinical / DMD / Peer-reviewed" strip ended.
+ * The bottlebrush floats on an 8s loop that lifts it 18px and rotates it
+ * 2deg, and a transform does not reserve layout space — so at the top of
+ * that loop the molecule reached 23px up into "FOUNDATION". Side by side
+ * on a desktop the art has whitespace above it and this never showed.
+ *
+ * The gap is wider than the 23px the float can travel, so the artwork
+ * stays clear of the strip through the whole loop.
+ *
+ * The caption is absolutely positioned into the bottom-right of the art
+ * box, which on a desktop is empty canvas. On a phone the molecule fills
+ * that box and the caption printed straight over it, so stack it under
+ * the image instead.
+ * ------------------------------------------------------------------ */
+@media (max-width: 900px) {
+  .hero { row-gap: 44px; }
+
+  .hero-art { flex-direction: column; justify-content: flex-start; }
+
+  .hero-art p {
+    position: static;
+    margin: 20px 0 0;
+    text-align: center;
+    max-width: 34ch;
+  }
+}
