@@ -82,7 +82,7 @@ export const homePage = singleton("homePage", "Home page", [
   txt("introBodyAfter", "Intro text (after “Elymers”)"),
   str("introLink", "Intro link label"),
   str("moaEyebrow", "Mechanism eyebrow"),
-  str("moaHeading", "Mechanism heading"),
+  heading("moaHeading", "Mechanism heading"),
   txt("moaDescription", "Mechanism description"),
   defineField({
     name: "cards",
@@ -146,7 +146,7 @@ export const sciencePage = singleton("sciencePage", "Science page", [
   txt("bandHeading", "Platform heading"),
   labelled("features", "Platform features"),
   str("moaEyebrow", "Mechanism eyebrow"),
-  str("moaHeading", "Mechanism heading"),
+  heading("moaHeading", "Mechanism heading"),
   txt("moaDescription", "Mechanism description"),
   str("evidenceEyebrow", "Evidence eyebrow"),
   str("evidenceHeading", "Evidence heading"),

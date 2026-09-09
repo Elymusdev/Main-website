@@ -434,3 +434,100 @@
 @media (max-width: 900px) {
   .podcast-strip { grid-template-columns: 1fr; row-gap: 24px; }
 }
+
+/* ------------------------------------------------------------------ *
+ * Mechanism heading (home + science)
+ *
+ * The heading grid deliberately shares .moa's 1.35fr/.65fr split with no
+ * column gap, so the standfirst on the right starts exactly above the
+ * step list in the card below. That leaves the heading's own column with
+ * no gutter, and once "Elymer™" grew a trademark the long first line ran
+ * right up to the standfirst.
+ *
+ * Keep the gap at 0 — moving it would break the alignment with the card —
+ * and inset the heading text instead. The copy also carries an explicit
+ * line break ("Elymer™ proposed mechanism / of action") so the split does
+ * not drift with the font metrics.
+ * ------------------------------------------------------------------ */
+.moa-home .section-heading h2 { padding-right: 48px; }
+
+/* Bottom-aligned boxes left the two blocks looking unrelated: the heading's
+   line-height is 1.06 and the standfirst's 1.6, so their last baselines
+   landed several pixels apart. Align the last baselines instead. */
+.moa-home .section-heading { align-items: baseline; }
+.moa-home .section-heading h2,
+.moa-home .section-heading > p:last-child { align-self: last baseline; }
+
+@media (max-width: 900px) {
+  /* Stacked, the two blocks are separate rows, so neither the inset nor the
+     baseline alignment applies. */
+  .moa-home .section-heading h2 { padding-right: 0; }
+  .moa-home .section-heading h2,
+  .moa-home .section-heading > p:last-child { align-self: auto; }
+}
+
+/* ------------------------------------------------------------------ *
+ * Platform horizon focus areas
+ *
+ * Each cell is a label over a one-line sub-heading. "Other Muscular
+ * Dystrophies" wraps to two lines below roughly 1200px, which pushed its
+ * "Future research" a line lower than the other two and broke the row.
+ *
+ * The cells already stretch to a common height, so let the label absorb
+ * the slack and the sub-heading sit on the bottom edge — the three then
+ * share a baseline whatever the labels do. Reserving a second line for
+ * every label would work too, but it would open a gap above the wide
+ * layout's sub-headings, where all three labels fit on one line.
+ *
+ * Stacked below 900px each cell sizes to its own content, so there is no
+ * slack to absorb and the rule is inert.
+ * ------------------------------------------------------------------ */
+.horizon-grid span { display: flex; flex-direction: column; }
+.horizon-grid b { margin-bottom: auto; }
+
+/* ------------------------------------------------------------------ *
+ * Publication list -> footnote
+ *
+ * Every publication carries 42px of padding above and below its rule, so
+ * the gap from one entry's last line to the next entry's rule is 42px.
+ * The footnote's rule sat 152px below the last entry instead — the list
+ * section's own 110px bottom padding on top of that 42px — which read as
+ * a hole after the final publication, most obviously on a phone.
+ *
+ * Drop the section padding when the footnote follows, so the last entry
+ * meets the footnote's rule on the same 42px rhythm as the entries above.
+ *
+ * The footnote's own `padding-top:0` also has to be restated here: it ties
+ * on specificity with the `.section-pad` shorthand, which the <=560px rule
+ * re-declares later in the file and so wins on phones. That put another
+ * 75px above the rule there — which is why the gap read as worse on a
+ * phone than on a laptop.
+ * ------------------------------------------------------------------ */
+.publication-list:has(+ .publication-note) { padding-bottom: 0; }
+.publication-note { padding-top: 0; }
+
+/* ------------------------------------------------------------------ *
+ * Mechanism explorer focus band — v3 schematic artwork
+ *
+ * The earlier artwork carried its own red circles around three panels
+ * labelled "Hypothesis I/II/III", and the focus band was positioned to
+ * sit over them. The v3 schematic is a single continuous membrane with
+ * four captions instead — "membrane gap", "patch", "repair", "heal" —
+ * so the band has to be re-placed against the new geometry.
+ *
+ * Measured off the 1920x1080 source, as a share of its width:
+ *
+ *   caption      centre    bottlebrush cluster
+ *   membrane gap 15.9%     2.3% - 18.3%   (the free molecule, pre-adsorb)
+ *   patch        40.5%    32.1% - 46.7%
+ *   repair       65.2%    54.6% - 71.9%
+ *   heal         88.6%    81.1% - 97.9%
+ *
+ * The three explorer steps map onto the last three captions, so each
+ * band runs to the midpoint of the empty space between neighbouring
+ * clusters (25%, 51%, 77%). "membrane gap" is the setup for the whole
+ * sequence rather than a step, so no step highlights it.
+ * ------------------------------------------------------------------ */
+.moa-hypotheses .moa-panel-focus { left: 25%; width: 26%; }
+.moa-hypotheses .moa-stage[data-step="1"] .moa-panel-focus { left: 51%; width: 26%; }
+.moa-hypotheses .moa-stage[data-step="2"] .moa-panel-focus { left: 77%; width: 22%; }

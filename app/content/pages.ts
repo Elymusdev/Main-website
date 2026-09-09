@@ -129,7 +129,7 @@ export const homeDefaults: HomeContent = {
   heroHeading: "Building a new layer of",
   heroAccent: "muscle protection",
   heroLede:
-    "Elymus is engineering bottlebrush macromolecules designed to stabilize damaged muscle cell membranes, starting with Duchenne muscular dystrophy.",
+    "Elymus is engineering bottlebrush macromolecules designed to stabilize damaged muscle cell membranes, starting with Duchenne muscular dystrophy (DMD).",
   heroPrimaryCta: "Explore the science",
   heroSecondaryCta: "View our pipeline",
   heroProof: [
@@ -146,7 +146,7 @@ export const homeDefaults: HomeContent = {
   introBodyAfter: "designed to engage and stabilize the muscle membrane.",
   introLink: "How the platform works",
   moaEyebrow: "Mechanism overview",
-  moaHeading: "Elymer™ proposed mechanism of action",
+  moaHeading: "Elymer™ proposed mechanism\nof action",
   moaDescription: "Hypothesis on action of the macromolecule on the lipid bilayer: patch, repair and heal.",
   cards: [
     {
@@ -175,7 +175,7 @@ export const homeDefaults: HomeContent = {
     { label: "Clinical", state: "" },
   ],
   podcastEyebrow: "Listen",
-  podcastHeading: "Bottlebrush block copolymer shields muscles and prevents DMD onset",
+  podcastHeading: "Bottlebrush macromolecule stabilizes damaged muscle membrane in DMD",
   podcastSource: "Base by Base · Episode 173",
   podcastCta: "Play the episode",
   podcastUrl: "https://basebybase.castos.com/episodes/synthetic-bottlebrush-block-copolymer-prevents-disease-onset",
@@ -203,7 +203,7 @@ export const scienceDefaults: ScienceContent = {
     { label: "Protection", text: "The intended result is physical membrane stabilization under mechanical stress." },
   ],
   moaEyebrow: "Mechanism overview",
-  moaHeading: "Elymer™ proposed mechanism of action",
+  moaHeading: "Elymer™ proposed mechanism\nof action",
   moaDescription: "Hypothesis on action of the macromolecule on the lipid bilayer: patch, repair and heal.",
   evidenceEyebrow: "Evidence framework",
   evidenceHeading: "From molecular behavior to physiological performance",
@@ -325,5 +325,5 @@ export const siteSettingsDefaults: SiteSettings = {
     "Elymus is a preclinical-stage biotechnology company. Its investigational technologies have not been approved by any regulatory authority, and safety and efficacy have not been established.",
   contactEmail: "contact@elymus.bio",
   logo: { url: "/elymus-mark.png", width: 1130, height: 2048 },
-  moaImage: { url: "/science/elymer-moa-three-hypotheses.png", width: 960, height: 540 },
+  moaImage: { url: "/science/elymer-moa-schematic.jpg", width: 1920, height: 1080 },
 };

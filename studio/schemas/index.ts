@@ -126,8 +126,9 @@ export const teamMember = defineType({
     defineField({
       name: "note",
       title: "Affiliation note",
-      type: "string",
-      description: "The smaller line under the name.",
+      type: "text",
+      rows: 2,
+      description: "The smaller line under the name. Line breaks render as separate lines.",
     }),
     defineField({
       name: "group",

@@ -29,7 +29,7 @@ export default async function Home() {
       </section>
 
       <section className="moa-home section-pad">
-        <div className="section-heading"><p className="eyebrow light">{c.moaEyebrow}</p><h2>{c.moaHeading}</h2><p>{c.moaDescription}</p></div>
+        <div className="section-heading"><p className="eyebrow light">{c.moaEyebrow}</p><h2><Lines text={c.moaHeading} /></h2><p>{c.moaDescription}</p></div>
         <MoaExplorer compact variant="hypotheses" image={settings.moaImage} />
       </section>
 

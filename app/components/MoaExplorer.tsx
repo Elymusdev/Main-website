@@ -12,7 +12,7 @@ const standardSteps = [
 const hypothesisSteps = [
   { n: "01", title: "Patch", text: "The molecule adsorbs at the membrane defect, helping patch the lipid bilayer and limit calcium ion flux." },
   { n: "02", title: "Repair", text: "The molecule may support repair of the disrupted lipid bilayer at the damaged site." },
-  { n: "03", title: "Healed", text: "Following repair, the molecule may desorb, leaving a healed lipid bilayer." },
+  { n: "03", title: "Heal", text: "Following repair, the molecule may desorb, leaving a healed lipid bilayer." },
 ];
 
 export default function MoaExplorer({
@@ -59,7 +59,7 @@ export default function MoaExplorer({
           width={image.width}
           height={image.height}
           alt={isHypotheses
-            ? "Elymer™ proposed mechanism of action showing the hypothesized action of the macromolecule on the lipid bilayer: patch, repair, and heal"
+            ? "Elymer™ proposed mechanism of action: a gap in the lipid bilayer lets ions flux across it, the macromolecule adsorbs and patches the gap, the bilayer repairs, and the macromolecule desorbs leaving a healed membrane"
             : "Three-step Elymer™ proposed mechanism of action showing a connected membrane, DMD membrane instability, and proposed bottlebrush-based membrane support"}
           priority={compact}
         />
