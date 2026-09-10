@@ -233,7 +233,7 @@ export const pipelineDefaults: PipelineContent = {
   dmdEyebrow: "DMD background",
   dmdHeading: "Dystrophin is the molecular shock absorber for normal muscle cell membranes",
   dmdBody: [
-    "Duchenne muscular dystrophy is caused by mutations in a gene that results in absent or severely reduced dystrophin. Dystrophin helps connect the muscle cell cytoskeleton to the membrane associated protein complex, supporting the sarcolemma during repeated contraction. Without this support, the membrane becomes vulnerable to disruption and abnormal calcium entry. Repeated injury contributes to inflammation, loss of functional muscle tissue, progressive weakness, and loss of mobility.",
+    "Duchenne muscular dystrophy is caused by mutations in a gene that results in absent or severely reduced dystrophin. Dystrophin helps connect the muscle cell cytoskeleton to the membrane associated protein complex, supporting the sarcolemma during repeated contraction. Without this support, the membrane becomes vulnerable to disruption and excessive calcium entry. Repeated injury contributes to inflammation, loss of functional muscle tissue, progressive weakness, and loss of mobility.",
     "Elymus is pursuing a physical membrane stabilization approach intended to address this downstream feature of DMD biology, which is mutation agnostic.",
   ],
   figures: [
