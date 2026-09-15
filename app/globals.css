@@ -592,3 +592,315 @@
   background: none;
   box-shadow: none;
 }
+
+/* ================================================================== *
+ * TYPE PASS — legibility floor + body-copy consistency
+ *
+ * Two problems, fixed together because they overlap:
+ *
+ * 1. Small type. An earlier pass raised the micro-labels to an 11px
+ *    floor on phones and tablets only, leaving the desktop design at
+ *    its authored 8-13px. The floor is now 14px and it applies at
+ *    every width. Nothing on the site is set below 14px.
+ *
+ * 2. Body copy. Measured across all seven pages, running prose used
+ *    five sizes (15/16/17/18/19px) for three roles, four line-heights
+ *    (1.5/1.55/1.6/1.7), and nine near-identical muted greys. It now
+ *    uses one scale and two muted tokens.
+ *
+ * Hierarchy below 16px is carried by weight, case, tracking and
+ * colour rather than by size, since size can no longer go lower.
+ * ================================================================== */
+
+:root {
+  /* Running prose on a light ground. --muted (#5e6c7b) already exists
+     and stays the standard; this is the larger section lede, one step
+     darker so it holds its own at 19px. */
+  --lede-ink: #4a5b6b;
+  /* Running prose on the navy / deep-blue grounds. 6.1:1 on the
+     lightest of them (#0b3159), 7.6:1 on --navy. */
+  --muted-dark: #9fb6c9;
+  /* The lede step on those same grounds — what the five page-hero
+     standfirsts were already using as a literal. 11.3:1 on --navy. */
+  --lede-dark: #b9d2e3;
+}
+
+/* ---- 1. 14px floor ----------------------------------------------- *
+ * Every run of text that was set between 8px and 13px. Grouped by the
+ * job each one does, not by page.
+ * ------------------------------------------------------------------ */
+
+/* Letter-spaced uppercase micro-labels. */
+.eyebrow,
+.hero-proof,
+.hero-art p,
+.pipeline-title span,
+.pipeline-detail b,
+.person p,
+.news-list small,
+.podcast-strip small,
+.inquiry-form label,
+.moa-controls button span,
+.chart-track b {
+  font-size: 14px;
+}
+
+/* Sentence-case labels, counters and captions. */
+.platform-cards span,
+.mini-pipeline,
+.chart-labels,
+.evidence-steps b,
+.publication-list span,
+.publication-list b,
+.publication-list small,
+.news-list > a > span,
+.person a,
+.person small,
+.publication-note p,
+.site-footer p {
+  font-size: 14px;
+}
+
+/* ---- Calls to action --------------------------------------------- *
+ * These are the site's actions, so they sit a step above the label
+ * floor rather than on it: every button and link-with-an-arrow reads
+ * at body size. Weight is unified too — .nav-cta was the only one of
+ * the five at 700 while the rest were 800.
+ * ------------------------------------------------------------------ */
+.button,
+.text-link,
+.nav-cta {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+/* Navigation. The header and footer carry the same five links, so
+   they match in both places. */
+.site-header nav a,
+.footer-links {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* 15px inputs trigger iOS Safari's zoom-on-focus, and the answers
+   should not be smaller than the labels above them. */
+.inquiry-form input,
+.inquiry-form select,
+.inquiry-form textarea {
+  font-size: 16px;
+}
+
+/* ---- 2. Body copy ------------------------------------------------ *
+ * Three steps. Every paragraph on the site is one of them.
+ * ------------------------------------------------------------------ */
+
+/* Hero lede — the one step above section ledes, home page only. */
+.lede { line-height: 1.6; }
+
+/* Section lede: the body column of a two-column section. The same
+   layout was 19px on the home page, 18px on Science and 18px/1.7 on
+   Pipeline, in three different greys. */
+.intro-grid > div:last-child,
+.science-primer > div:last-child,
+.dmd-narrative {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--lede-ink);
+}
+
+/* Standfirst: the single sentence that introduces a section, set
+   beside or under its heading. The five page-hero standfirsts are
+   19px; the Mechanism Overview one was 16px in the body colour, so
+   next to a 58px heading it read as a stranded caption rather than as
+   the section's opening line. Same step now, on both pages it
+   appears (Home and Science). */
+.page-hero > p:last-child,
+.section-heading > p:last-child {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--lede-dark);
+}
+
+/* Standard body copy. .platform-cards p was the lone 15px. */
+.platform-cards p,
+/* :not() because .pipeline-strip's own eyebrow is a <p> too, and this
+   rule out-specifies .eyebrow — which is also why that one eyebrow was
+   grey where every other eyebrow on the site is --blue. */
+.pipeline-strip p:not(.eyebrow),
+.pipeline-title p,
+.publication-list p,
+.contact-intro > p:last-of-type,
+.contact-grid p,
+.contact-audiences p,
+.disclosure-block p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* Small body copy: captions, footnotes, citation detail, the footer.
+   .person small was the last 1.5 line-height in running prose. */
+.person small,
+.publication-list small,
+.publication-note p,
+.dmd-figures figcaption,
+.site-footer p,
+.fine-print {
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* Label-and-value pairs. Pipeline's value was the site's only 17px;
+   Science's equivalent (.evidence-steps span) was already 16px. */
+.pipeline-detail span { font-size: 16px; }
+
+/* Sub-heading over body copy in a dark grid cell — the same pattern on
+   Science (.feature-row, 21px) and Pipeline (.horizon-grid, 22px). */
+.feature-row b,
+.horizon-grid b {
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+/* Body copy on the dark sections. .feature-row p was already this
+   colour; the other three were #8da9bd, #8fa6b9 and #9cb0c4 doing the
+   same job on the same grounds. */
+.feature-row p,
+.horizon-grid span,
+.moa-controls button {
+  color: var(--muted-dark);
+}
+
+.moa-controls button small { font-size: 16px; line-height: 1.6; }
+
+.site-footer p,
+.fine-print {
+  color: var(--muted-dark);
+}
+
+/* One deliberate exception to --muted-dark: .values sits on --blue,
+   where --muted-dark would fall to 3.4:1, so its copy stays lighter.
+   Left as authored — noted here so it reads as a decision. */
+
+/* ---- 3. Label colour + contrast ---------------------------------- *
+ * The labels had the same spread as the prose did: seven blue-greys
+ * (#4f7286 #55707f #577083 #597081 #617687 #6b8492 #7894aa) all doing
+ * one job. Labels now take the same two muted tokens as the copy they
+ * sit with, and the only other colours in small type are deliberate:
+ * --blue for counters and links, --blue2 for the card numbers.
+ *
+ * Contrast is measured against the background each element actually
+ * sits on. Three of these were also below the 4.5:1 that WCAG AA asks
+ * for at this size: .platform-cards span was 2.8:1 on white,
+ * .pipeline-detail b 3.9:1, .moa-controls button span 3.6:1 on navy.
+ * ------------------------------------------------------------------ */
+
+/* Labels on the light grounds. */
+.hero-proof,
+.hero-art p,
+.pipeline-detail b,
+.chart-labels,
+.mini-pipeline,
+.news-list small,
+.inquiry-form label {
+  color: var(--muted);
+}
+
+/* Labels on the navy grounds. The mechanism step number had its own
+   colour; it now inherits from the button like the rest of it. */
+.disclosure { color: var(--muted-dark); }
+.moa-controls button span { color: inherit; }
+
+/* Counters. The home cards' 01/02/03 were a pale #6fa3bd (2.8:1 on
+   white); the identical counters on Science and News were already
+   --blue, so all three now match. */
+.platform-cards span { color: var(--blue); }
+
+/* .pipeline-strip p (in the base sheet) also matches that section's
+   own eyebrow and out-specifies .eyebrow, which left one eyebrow grey
+   where the other nine are --blue. Restated at equal specificity. */
+p.eyebrow { color: var(--blue); }
+
+/* ---- 4. Room for the larger labels ------------------------------- *
+ * Both grids are four equal `1fr` columns, which cannot shrink below
+ * their longest word; at 14px the stage names need to be able to wrap
+ * rather than push the grid wider than its cell. .mini-pipeline
+ * stacks into one column on phones, so it is left alone there.
+ * ------------------------------------------------------------------ */
+@media (min-width: 561px) {
+  .mini-pipeline { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.mini-pipeline span,
+.chart-labels span {
+  overflow-wrap: break-word;
+}
+
+/* Labels, not prose — they keep a tighter line-height when they wrap. */
+.chart-labels { line-height: 1.3; }
+
+/* Three uppercase proof points on one row; at 14px they can outgrow
+   the hero's text column before the layout stacks. */
+.hero-proof { flex-wrap: wrap; }
+
+/* The mechanism tabpanel is clipped to 1px and only ever reaches a
+   screen reader, so its size is academic — set to the floor so the
+   sheet holds nothing under 14px. */
+.moa-status span,
+.moa-status strong {
+  font-size: 14px;
+}
+
+/* ---- Figure captions (Pipeline) ---------------------------------- *
+ * The two captions are centred inside a 78px min-height band, so a
+ * two-line caption and a one-line caption start their first line at
+ * different heights — 9px apart on a laptop, side by side, which
+ * reads as one caption sitting lower than the other.
+ *
+ * Align the text to the top of the band instead, and let the caption
+ * absorb the card's leftover height so both cards still end level.
+ * ------------------------------------------------------------------ */
+.dmd-figures figcaption {
+  /* Body size rather than the caption step: these two sentences carry
+     the explanation of what each figure shows, and the figures sit in
+     a section whose copy is 16-19px, so at 14px they read as an
+     afterthought under the artwork. */
+  font-size: 16px;
+  align-items: flex-start;
+  flex: 1;
+}
+
+/* ---- Footnote rule (Pipeline horizon) ---------------------------- *
+ * The site has three appended footnotes: this one, the publications
+ * note and the footer fine print. All three are 14px, but the other
+ * two are separated from the content above by a hairline and this one
+ * was not, so it floated loose under the focus-area grid.
+ *
+ * The rule uses #274361 — the colour already showing through as the
+ * 1px gaps between that grid's cells — so it reads as the bottom edge
+ * of the grid rather than as a new element. Spacing matches the other
+ * two footnotes: ~20px between the rule and the text.
+ * ------------------------------------------------------------------ */
+.disclosure {
+  /* Read at body size rather than as fine print: this is a regulatory
+     statement about what the pipeline does and does not represent, so
+     it is not something to shrink. Same 16px/1.6 as the focus-area
+     copy above it, kept apart from it by the rule. */
+  font-size: 16px;
+  line-height: 1.6;
+  margin-top: 42px;
+  padding-top: 20px;
+  border-top: 1px solid #274361;
+}
+
+/* ---- Mechanism step number -------------------------------------- *
+ * The <=900px block restyled the stacked card and gave the step
+ * number a bold, letter-spaced treatment; the desktop card never got
+ * it, so the same element read as a plain number on a laptop and as a
+ * label on a phone. Apply one treatment at both, matching
+ * .evidence-steps b — the site's other numbered step list.
+ * ------------------------------------------------------------------ */
+.moa-controls button span {
+  font-weight: 700;
+  letter-spacing: .16em;
+}
