@@ -904,3 +904,46 @@ p.eyebrow { color: var(--blue); }
   font-weight: 700;
   letter-spacing: .16em;
 }
+
+/* ------------------------------------------------------------------ *
+ * Contact form state
+ *
+ * The form now posts to /api/inquiry instead of handing the visitor a
+ * mailto: link, so it needs somewhere to say what happened.
+ * ------------------------------------------------------------------ */
+
+/* Honeypot: off-screen rather than display:none, since some bots skip
+   anything that is not rendered. aria-hidden and tabindex="-1" on the
+   markup keep it away from people. */
+.honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Rendered even when idle so the live region exists before it has
+   content — that is what lets a screen reader notice the change — but
+   it must not occupy a grid row until it says something. */
+.form-status:empty { display: none; }
+
+.form-status {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Both measured against --ice, the form's background: 6.1:1 and 5.8:1.
+   The red is the same one the pipeline chart's status pill already
+   uses, rather than a second red. */
+.form-status-ok { color: #15683f; }
+.form-status-error { color: #a53825; }
+
+.inquiry-form input:disabled,
+.inquiry-form select:disabled,
+.inquiry-form textarea:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
