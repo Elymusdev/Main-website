@@ -258,7 +258,6 @@ export const pipelineDefaults: PipelineContent = {
   horizonItems: [
     { label: "DMD", text: "Core focus" },
     { label: "Other Muscular Dystrophies", text: "Future research" },
-    { label: "Undisclosed", text: "Future research" },
   ],
   horizonDisclosure: "Future indications are exploratory and do not represent active development programs.",
   ctaHeading: "Interested in the Elymus platform?",
